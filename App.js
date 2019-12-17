@@ -1,11 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Day from './Components/Day';
+import Calendar from './Components/Calendar';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Day day={1} />
+      <Calendar />
     </View>
   );
 }

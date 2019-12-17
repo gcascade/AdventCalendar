@@ -1,5 +1,5 @@
-import React from 'react'
-import { StyleSheet, View, Button } from 'react-native'
+import React from 'react';
+import { StyleSheet, View, Button } from 'react-native';
 
 export default class Day extends React.Component {
     constructor(props) {
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         height: 80,
         width: 80,
-        alignItems: "center"
+        alignItems: "center",
     },
     
     button: {
