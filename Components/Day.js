@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Button } from 'react-native';
+import { StyleSheet, View, Button, Image } from 'react-native';
 
 export default class Day extends React.Component {
     constructor(props) {
@@ -13,10 +13,23 @@ export default class Day extends React.Component {
         this.setState({ isClicked: true})
     }
 
+    _displayButton = () => {
+        if (this.state.isClicked) {
+            return (
+                <Image style={styles.image} source={require('../assets/icon.png')} />
+            )
+        }
+        else {
+            return (
+                <Button style={styles.button} title={this.props.day.toString()} onPress={() => this._clickButton()} />
+            )
+        }
+    }
+
     render() {
         return (
             <View style={styles.container}>
-                <Button stlye={styles.button} title={this.props.day.toString()} onPress={() => this._clickButton()} />
+                {this._displayButton()}
             </View>
         );
     }
@@ -24,7 +37,6 @@ export default class Day extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        padding: 5,
         borderWidth: 1,
         borderColor: 'black',
         borderRadius: 10,
@@ -35,5 +47,11 @@ const styles = StyleSheet.create({
     
     button: {
         fontSize: 14
+    },
+
+    image: {
+        height: 80,
+        width: 80,
+        borderRadius: 10
     }
 })
