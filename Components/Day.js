@@ -42,11 +42,11 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         height: 80,
         width: 80,
-        alignItems: "center",
+        alignItems: 'center',
     },
     
     button: {
-        fontSize: 14
+        fontSize: 14,
     },
 
     image: {

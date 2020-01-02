@@ -25,6 +25,24 @@ export default class Calendar extends React.Component {
      * Create the list of 6 rows
      */
     _generateRows = () => {
+        // return (
+        //     <View>
+        //         <View key = {1} style={styles.row}>
+        //             <Day day={1 + 0 * 4}/>
+        //             <Day day={2 + 0 * 4}/>
+        //             <Day day={3 + 0 * 4}/>
+        //             <Day day={4 + 0 * 4}/>
+        //         </View>
+        //         <View key = {2} style={styles.row}>
+        //             <Day day={1 + 1 * 4}/>
+        //             <Day day={2 + 1 * 4}/>
+        //             <Day day={3 + 1 * 4}/>
+        //             <Day day={4 + 1 * 4}/>
+        //         </View>
+        //     </View>
+        // )
+
+        //TO DO Fix
         var rowList = []
 
         for (let i = 0; i < 6; i++) {
@@ -39,12 +57,12 @@ export default class Calendar extends React.Component {
      */
     _createRow = (rowMultiplier) => {
         return (            
-        <View key = {rowMultiplier} style={styles.row}>
-            <Day day={1 + rowMultiplier * 4}/>
-            <Day day={2 + rowMultiplier * 4}/>
-            <Day day={3 + rowMultiplier * 4}/>
-            <Day day={4 + rowMultiplier * 4}/>
-        </View>
+            <View key = {rowMultiplier} style={styles.row}>
+                <Day day={1 + rowMultiplier * 4}/>
+                <Day day={2 + rowMultiplier * 4}/>
+                <Day day={3 + rowMultiplier * 4}/>
+                <Day day={4 + rowMultiplier * 4}/>
+            </View>
         )
     }
 
@@ -61,7 +79,7 @@ export default class Calendar extends React.Component {
 const styles = StyleSheet.create({
 
     container: {
-        
+        flexWrap: 'wrap',
     },
     
     row: {
@@ -73,9 +91,8 @@ const styles = StyleSheet.create({
     title: {
         marginTop: 25,
         fontSize: 24,
-        fontWeight: "bold",
-        textAlign: "center",
-        marginBottom: 5
-        
+        fontWeight: 'bold',
+        textAlign: 'center',
+        marginBottom: 5,        
     }
 })
