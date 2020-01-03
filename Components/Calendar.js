@@ -13,7 +13,7 @@ export default class Calendar extends React.Component {
     _createCalendar = () => {
         let cal = (
             <View styles={styles.container}>
-                <Text style={styles.title}>Calendrier de l'avent</Text>
+                <Text style={styles.title}>Advent Calendar</Text>
                 {this._generateRows()}
             </View>
         )
@@ -25,24 +25,6 @@ export default class Calendar extends React.Component {
      * Create the list of 6 rows
      */
     _generateRows = () => {
-        // return (
-        //     <View>
-        //         <View key = {1} style={styles.row}>
-        //             <Day day={1 + 0 * 4}/>
-        //             <Day day={2 + 0 * 4}/>
-        //             <Day day={3 + 0 * 4}/>
-        //             <Day day={4 + 0 * 4}/>
-        //         </View>
-        //         <View key = {2} style={styles.row}>
-        //             <Day day={1 + 1 * 4}/>
-        //             <Day day={2 + 1 * 4}/>
-        //             <Day day={3 + 1 * 4}/>
-        //             <Day day={4 + 1 * 4}/>
-        //         </View>
-        //     </View>
-        // )
-
-        //TO DO Fix
         var rowList = []
 
         for (let i = 0; i < 6; i++) {
@@ -83,9 +65,8 @@ const styles = StyleSheet.create({
     },
     
     row: {
-        flex: 1,
         flexDirection: 'row',
-        justifyContent: 'space-around',
+        justifyContent: 'center',
     },
 
     title: {
