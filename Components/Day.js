@@ -27,6 +27,7 @@ export default class Day extends React.Component {
                         <View>
                             <Text style={styles.title}>Day {this.props.day.toString()}</Text>
                             <Image style={styles.image} source={require('../assets/icon.png')} />
+                            <Text style={styles.title}>Congratulations ! You got this super item !</Text>
                         </View>
 
                     </TouchableHighlight>
