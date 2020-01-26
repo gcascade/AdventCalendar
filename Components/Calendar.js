@@ -1,14 +1,17 @@
 import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
 import Day from './Day'
+import { connect } from 'react-redux'
 
-export default class Calendar extends React.Component {
+class Calendar extends React.Component {
     constructor(props) {
         super(props)
     }
 
     /**
      * Generate the calendar
+     * 
+     * @returns the calendar
      */
     _createCalendar = () => {
         let cal = (
@@ -23,12 +26,34 @@ export default class Calendar extends React.Component {
 
     /**
      * Create the list of 6 rows
+     * 
+     * @returns a list of 6 rows
      */
     _generateRows = () => {
         var rowList = []
 
-        for (let i = 0; i < 6; i++) {
-            rowList.push(this._createRow(i))
+        if (this.props.randomize) {
+
+            // Generate random number between 1 and 24 and assign them randomly on the grid
+            const min = 1
+            const max = 25
+            var randomList = []
+            while (randomList.length < 24) {
+                var random = Math.floor(Math.random() * (max - min) + min)
+                if (!randomList.some(n => n == random)) {
+                    randomList.push(random)
+                }
+            }
+
+            // Generate each row
+            for(let i = 0; i < 6; i++) {
+                rowList.push(this._createRowFromElements(i, randomList[i*4], randomList[i*4+1], randomList[i*4+2], randomList[i*4+3]))
+            }
+        }
+        else {            
+            for (let i = 0; i < 6; i++) {
+                rowList.push(this._createRow(i))
+            }
         }
 
         return rowList
@@ -36,14 +61,37 @@ export default class Calendar extends React.Component {
 
     /**
      * Creates a row with its elements
+     * 
+     * @param rowNumber rowNumber
+     * @returns a view that is a row of 4 elements
      */
-    _createRow = (rowMultiplier) => {
+    _createRow = (rowNumber) => {
+        return this._createRowFromElements(
+            rowNumber,
+            1 + rowNumber * 4,
+            2 + rowNumber * 4,
+            3 + rowNumber * 4,
+            4 + rowNumber * 4
+        )
+    }
+
+    /**
+     * Creates a row with its elements
+     * 
+     * @param key rowKey
+     * @param element1 first element of the row
+     * @param element2 second element of the row
+     * @param element3 third element of the row
+     * @param element4 fourth element of the row
+     * @returns a view that is a row of 4 elements
+     */
+    _createRowFromElements = (key, element1, element2, element3, element4) => {
         return (            
-            <View key = {rowMultiplier} style={styles.row}>
-                <Day day={1 + rowMultiplier * 4}/>
-                <Day day={2 + rowMultiplier * 4}/>
-                <Day day={3 + rowMultiplier * 4}/>
-                <Day day={4 + rowMultiplier * 4}/>
+            <View key = {key} style={styles.row}>
+                <Day day={element1}/>
+                <Day day={element2}/>
+                <Day day={element3}/>
+                <Day day={element4}/>
             </View>
         )
     }
@@ -77,3 +125,11 @@ const styles = StyleSheet.create({
         marginBottom: 5,        
     }
 })
+
+const mapStateToProps = state => {
+    return {
+        randomize: state.randomize
+    }
+}
+
+export default connect(mapStateToProps)(Calendar)
