@@ -10,7 +10,12 @@ class Settings extends React.Component {
     _toggleRandomizer = (value) => {
         const action = { type: 'TOGGLE_RANDOMIZE', value: value}
         this.props.dispatch(action)
-     }
+    }
+
+    _toggleHighlightDay = (value) => {
+        const action = { type: 'TOGGLE_HIGHLIGHT_DAY', value: value}
+        this.props.dispatch(action)
+    }
 
     render() {
         return (
@@ -23,6 +28,13 @@ class Settings extends React.Component {
                     style={styles.switch}
                     onValueChange = {this._toggleRandomizer}
                     value = {this.props.randomize}/>
+                </View>
+                <View style={styles.switchRow}>
+                    <Text style={styles.text}>Highlight current day ?</Text>
+                    <Switch
+                    style={styles.switch}
+                    onValueChange = {this._toggleHighlightDay}
+                    value = {this.props.highlightDay}/>
                 </View>
                 {/* <Text style={styles.text}>Thanks to https://icons8.com/ for the icons</Text> */}
             </View>
@@ -62,7 +74,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
     return {
-        randomize: state.randomize
+        randomize: state.randomize,
+        highlightDay: state.highlightDay,
     }
 }
 

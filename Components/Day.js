@@ -1,7 +1,8 @@
 import React from 'react';
 import { StyleSheet, View, Image, Modal, TouchableHighlight, Text } from 'react-native';
+import { connect } from 'react-redux';
 
-export default class Day extends React.Component {
+class Day extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -11,9 +12,11 @@ export default class Day extends React.Component {
 
     _setModalVisible(visible) {
         this.setState({modalVisible: visible});
-      }
+    }
 
-    _displayModal = () => {
+    _displayModal = () => {        
+        var day = new Date().getDate(); //Current Day
+        let highlight = this.props.highlightDay && day === this.props.day;
         return (
             <View>
                 <Modal
@@ -36,8 +39,8 @@ export default class Day extends React.Component {
                     onPress={() => {
                     this._setModalVisible(true);
                     }}>
-                        <View style={styles.container}>
-                            <Text style={styles.button}>{this.props.day.toString()}</Text>
+                        <View style={[styles.container, highlight ? styles.containerHighlight : styles.containerClassic]}>
+                            <Text style={highlight ? styles.buttonHighlight : styles.button}>{this.props.day.toString()}</Text>
                         </View>
                 </TouchableHighlight>
             </View>
@@ -55,17 +58,31 @@ export default class Day extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        borderWidth: 1,
-        borderColor: 'black',
-        borderRadius: 10,
         height: 80,
         width: 80,
         alignItems: 'center',
-        margin: 1
+        margin: 1,
+    },
+
+    containerHighlight: {
+        borderWidth: 4,
+        borderColor: 'red',
+        borderRadius: 10,
+    },
+
+    containerClassic: {
+        borderWidth: 1,
+        borderColor: 'black',
+        borderRadius: 10,
     },
     
     button: {
         fontSize: 16,
+    },
+
+    buttonHighlight: {
+        fontSize: 16,
+        fontWeight: 'bold'
     },
 
     title: {
@@ -83,3 +100,11 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     },
 })
+
+const mapStateToProps = state => {
+    return {
+        highlightDay: state.highlightDay
+    }
+}
+
+export default connect(mapStateToProps)(Day)

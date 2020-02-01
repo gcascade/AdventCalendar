@@ -1,4 +1,4 @@
-const initialState = { randomize: false }
+const initialState = { randomize: false, highlightDay: false }
 
 function setOptions(state = initialState, action) {
     let nextState
@@ -7,6 +7,12 @@ function setOptions(state = initialState, action) {
             nextState = {
                 ...state,
                 randomize: action.value
+            }
+            return nextState || state
+        case 'TOGGLE_HIGHLIGHT_DAY':
+            nextState = {
+                ...state,
+                highlightDay: action.value
             }
             return nextState || state
         default:
