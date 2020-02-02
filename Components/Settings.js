@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Text, Switch } from 'react-native'
+import { StyleSheet, View, Text, Switch, TextInput } from 'react-native'
 import { connect } from 'react-redux'
 
 class Settings extends React.Component {
@@ -21,7 +21,11 @@ class Settings extends React.Component {
         return (
             <View style={styles.container}>
                 <Text style={styles.title}>Settings</Text>
-                <Text style={styles.text}>To be done</Text>
+                <View style={styles.switchRow}>
+                    <Text style={styles.text}>Calendar's title:</Text>
+                    <TextInput style={styles.textinput}
+                    defaultValue='Advent Calendar'></TextInput>
+                </View>
                 <View style={styles.switchRow}>
                     <Text style={styles.text}>Randomize calendar's layout ?</Text>
                     <Switch
@@ -69,7 +73,16 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         padding: 5,
-    }
+    },
+
+    textinput: {
+        marginLeft: 5,
+        marginRight: 5,
+        height: 30,
+        width: 200,
+        borderColor: '#000000',
+        borderWidth: 1,
+    },
 })
 
 const mapStateToProps = state => {
