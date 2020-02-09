@@ -16,7 +16,7 @@ class Calendar extends React.Component {
     _createCalendar = () => {
         let cal = (
             <View styles={styles.container}>
-                <Text style={styles.title}>Advent Calendar</Text>
+                <Text style={styles.title}>{this.props.title}</Text>
                 {this._generateRows()}
             </View>
         )
@@ -128,7 +128,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
     return {
-        randomize: state.randomize
+        randomize: state.randomize,
+        title: state.title
     }
 }
 

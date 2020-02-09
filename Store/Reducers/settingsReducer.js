@@ -1,4 +1,4 @@
-const initialState = { randomize: false, highlightDay: false }
+const initialState = { randomize: false, highlightDay: false, title: 'Advent Calendar' }
 
 function setOptions(state = initialState, action) {
     let nextState
@@ -13,6 +13,12 @@ function setOptions(state = initialState, action) {
             nextState = {
                 ...state,
                 highlightDay: action.value
+            }
+            return nextState || state
+        case 'EDIT_TITLE':
+            nextState = {
+                ...state,
+                title: action.value
             }
             return nextState || state
         default:
