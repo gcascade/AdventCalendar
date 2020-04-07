@@ -15,8 +15,8 @@ class Day extends React.Component {
     }
 
     _displayModal = () => {        
-        var day = new Date().getDate(); //Current Day
-        let highlight = this.props.highlightDay && day === this.props.day;
+        var today = new Date().getDate(); //Current Day
+        let highlight = this.props.highlightDay && today === this.props.day;
         return (
             <View>
                 <Modal
@@ -29,8 +29,8 @@ class Day extends React.Component {
                         }}>
                         <View>
                             <Text style={styles.title}>Day {this.props.day.toString()}</Text>
-                            <Image style={styles.image} source={require('../assets/icon.png')} />
-                            <Text style={styles.title}>Congratulations ! You got this super item !</Text>
+                            <Image style={styles.image} source={this.props.urls[this.props.day - 1]} />
+                            <Text style={styles.title}>Congratulations ! You got a {this.props.names[this.props.day - 1]} !</Text>
                         </View>
 
                     </TouchableHighlight>
@@ -103,7 +103,9 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
     return {
-        highlightDay: state.highlightDay
+        highlightDay: state.highlightDay,
+        urls: state.urls,
+        names: state.names,
     }
 }
 
